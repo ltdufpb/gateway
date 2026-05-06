@@ -51,9 +51,11 @@ spring:
             - RewriteResponseHeader=Location, http://core-backend(?<segment>/?.*), http://localhost/rectest/cardpgbackend${segment}
 
         - id: actuator
-          uri: http://localhost
+          uri: http://localhost:8080
           predicates:
-            - Path=/actuator/**
+            - Path=/rectest/gateway/actuator/**
+          filters:
+            - StripPrefix=1 # remove /gateway
 
         - id: core-frontend
           uri: http://core-frontend
